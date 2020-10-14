@@ -33,3 +33,33 @@ services:
       - "8088:8088"
     depends_on:
       - cadence
+
+  servico-vendas:
+    image: "servico-vendas"
+    container_name: servico-vendas
+    ports:
+      - 8080:8080
+
+  servico-pagamentos:
+    image: "servico-pagamentos"
+    container_name: servico-pagamentos
+    ports:
+      - 8081:8081
+
+  servico-notificacoes:
+    image: "servico-notificacoes"
+    container_name: servico-notificacoes
+    ports:
+      - 8082:8082
+
+  servico-logistica:
+    image: "servico-logistica"
+    container_name: servico-logistica
+    ports:
+      - 8083:8083
+
+  servico-estoque:
+    image: "servico-estoque"
+    container_name: servico-estoque
+    ports:
+      - 8084:8084
