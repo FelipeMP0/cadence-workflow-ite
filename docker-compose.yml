@@ -7,7 +7,6 @@ services:
   statsd:
     image: graphiteapp/graphite-statsd
     ports:
-      - "8080:80"
       - "2003:2003"
       - "8125:8125"
       - "8126:8126"

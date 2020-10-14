@@ -4,6 +4,9 @@ import java.net.URI;
 import java.time.Duration;
 import java.util.UUID;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -20,7 +23,8 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
     final URI uri =
         UriComponentsBuilder.fromHttpUrl("http://servico-estoque").port(8084).build().toUri();
 
-    return this.restTemplate.getForObject(uri, String.class);
+    HttpEntity httpEntity = new HttpEntity(this.createHeaders(saleId));
+    return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
   }
 
   @Override
@@ -28,7 +32,8 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
     final URI uri =
         UriComponentsBuilder.fromHttpUrl("http://servico-pagamentos").port(8081).build().toUri();
 
-    return this.restTemplate.getForObject(uri, String.class);
+    HttpEntity httpEntity = new HttpEntity(this.createHeaders(saleId));
+    return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
   }
 
   @Override
@@ -36,14 +41,23 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
     final URI uri =
         UriComponentsBuilder.fromHttpUrl("http://servico-logistica").port(8083).build().toUri();
 
-    return this.restTemplate.getForObject(uri, String.class);
+    HttpEntity httpEntity = new HttpEntity(this.createHeaders(saleId));
+    return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
   }
 
   @Override
   public String notifyCustomer(final UUID saleId, final String message) {
     final URI uri =
         UriComponentsBuilder.fromHttpUrl("http://servico-notificacoes").port(8082).build().toUri();
+    final HttpHeaders headers = this.createHeaders(saleId);
+    headers.set("message", message);
+    HttpEntity httpEntity = new HttpEntity(headers);
+    return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
+  }
 
-    return this.restTemplate.getForObject(uri, String.class);
+  private HttpHeaders createHeaders(final UUID saleId) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("saleId", saleId.toString());
+    return headers;
   }
 }
