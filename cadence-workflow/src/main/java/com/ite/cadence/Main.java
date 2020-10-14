@@ -8,6 +8,7 @@ public class Main {
     Worker.Factory factory = new Worker.Factory("samples-domain");
     Worker worker = factory.newWorker("sale");
     worker.registerWorkflowImplementationTypes(SaleWorkflowImpl.class);
+    worker.registerActivitiesImplementations(new SaleWorkflowActivitiesImpl());
     factory.start();
   }
 }

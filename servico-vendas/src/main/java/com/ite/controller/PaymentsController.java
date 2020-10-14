@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("notifications")
-class NotificationsController {
+@RequestMapping("payments")
+class PaymentsController {
 
   @GetMapping()
-  ResponseEntity<String> sendNotification(
-      @RequestHeader final UUID saleId, @RequestHeader final String message) {
-    return ResponseEntity.ok(
-        "Notificação enviada sobre a venda = " + saleId + "\n mensagem = " + message);
+  ResponseEntity<String> validatePayment(@RequestHeader final UUID saleId) {
+    return ResponseEntity.ok("Pagamentos validados para venda = " + saleId);
   }
 }

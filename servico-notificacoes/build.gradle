@@ -16,7 +16,7 @@ dependencies {
 docker {
     springBootApplication {
         baseImage = "openjdk:11-jre-slim"
-        ports = [8082]
+        ports = [8083]
         images = ["servico-notificacoes:latest"]
     }
 }

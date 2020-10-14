@@ -1,0 +1,30 @@
+version: '3'
+services:
+  servico-vendas:
+    image: "servico-vendas"
+    container_name: servico-vendas
+    ports:
+      - 8081:8081
+
+#  servico-pagamentos:
+#    image: "servico-pagamentos"
+#    container_name: servico-pagamentos
+#    ports:
+#      - 8082:8082
+#
+#  servico-notificacoes:
+#    image: "servico-notificacoes"
+#    container_name: servico-notificacoes
+#    ports:
+#      - 8083:8083
+#
+#  servico-logistica:
+#    image: "servico-logistica"
+#    container_name: servico-logistica
+#    ports:
+#      - 8084:8084
+
+# Shared network so that services brought up in different docker-compose files can talk to each other
+networks:
+  default:
+    name: begone

@@ -30,6 +30,6 @@ public class SaleWorkflowImpl implements SaleWorkflow {
     this.activities.notifyCustomer(saleId, "Processo de entrega iniciado");
     LOGGER.info("Notificação sobre processo de entrega enviada");
 
-    return "Venda " + saleId + "finalizada";
+    return "Venda " + saleId + " finalizada";
   }
 }

@@ -21,7 +21,7 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
   @Override
   public String verifyInventory(final UUID saleId) {
     final URI uri =
-        UriComponentsBuilder.fromHttpUrl("http://servico-estoque").port(8084).build().toUri();
+        UriComponentsBuilder.fromHttpUrl("http://localhost/inventory").port(8081).build().toUri();
 
     HttpEntity httpEntity = new HttpEntity(this.createHeaders(saleId));
     return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
@@ -30,7 +30,7 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
   @Override
   public String validatePayment(final UUID saleId) {
     final URI uri =
-        UriComponentsBuilder.fromHttpUrl("http://servico-pagamentos").port(8081).build().toUri();
+        UriComponentsBuilder.fromHttpUrl("http://localhost/payments").port(8081).build().toUri();
 
     HttpEntity httpEntity = new HttpEntity(this.createHeaders(saleId));
     return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
@@ -39,7 +39,7 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
   @Override
   public String startShipmentProcess(final UUID saleId) {
     final URI uri =
-        UriComponentsBuilder.fromHttpUrl("http://servico-logistica").port(8083).build().toUri();
+        UriComponentsBuilder.fromHttpUrl("http://localhost/logistics").port(8081).build().toUri();
 
     HttpEntity httpEntity = new HttpEntity(this.createHeaders(saleId));
     return this.restTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
@@ -48,7 +48,10 @@ public class SaleWorkflowActivitiesImpl implements SaleWorkflowActivities {
   @Override
   public String notifyCustomer(final UUID saleId, final String message) {
     final URI uri =
-        UriComponentsBuilder.fromHttpUrl("http://servico-notificacoes").port(8082).build().toUri();
+        UriComponentsBuilder.fromHttpUrl("http://localhost/notifications")
+            .port(8081)
+            .build()
+            .toUri();
     final HttpHeaders headers = this.createHeaders(saleId);
     headers.set("message", message);
     HttpEntity httpEntity = new HttpEntity(headers);
