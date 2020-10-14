@@ -1,0 +1,8 @@
+rootProject.name = 'ite-projeto'
+include 'servico-vendas'
+include 'servico-estoque'
+include 'servico-pagamentos'
+include 'servico-logistica'
+include 'servico-notificacoes'
+include 'cadence-workflow'
+
